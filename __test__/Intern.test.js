@@ -42,5 +42,5 @@ test("Intern Get role", function () {
 
 test("Intern Get GitHub", function () {
   const testIntern = new Intern("Herbert", 121, "herbert@yahoo.com", "UCB");
-  expect(testIntern.getSchoolName()).toBe("UCB");
+  expect(testIntern.getSchool()).toBe("UCB");
 });

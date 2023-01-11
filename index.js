@@ -275,7 +275,7 @@ const path = require("path")
 const fs = require("fs")
 
 
-const OUTPUT_DIR = path.resolve(__dirname, "output.html")
+const OUTPUT_DIR = path.resolve(__dirname, "team.html")
 const outputPath = path.join(OUTPUT_DIR, )
 const team = []
 
@@ -338,7 +338,7 @@ const promptManager = () => {
     .then(answers => {
         console.log(answers)
         const manager = new Manager(answers.name, answers.employeeId, answers.email, answers.officeNumber)
-        menu.push(manager)
+        team.push(manager)
         promptMenu()
     })
 }
@@ -346,7 +346,7 @@ const promptMenu = () => {
     return inquirer.prompt([
         {
             type: 'list',
-            name: 'main',
+            name: 'menu',
             message: 'Please choose from the following actions:',
             choices: ['Add an intern', 'Add an engineer', 'Done']
         }
@@ -496,7 +496,7 @@ const promptEngineer = () => {
         console.log(answers)
         const engineer = new Engineer(answers.name, answers.employeeId, answers.email, answers.github)
         team.push(engineer)
-        promptMain()
+        promptMenu()
     })
 }
 const buildTeam = () => {
