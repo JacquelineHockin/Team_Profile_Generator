@@ -6,8 +6,8 @@ const generateTeam = require("./src/generate-page");
 const fs = require("fs");
 const path = require("path");
 
-// const DIST_DIR = path.resolve(__dirname, "dist");
-// const distPath = path.join(DIST_DIR, "team.html");
+const DIST_DIR = path.resolve(__dirname, "dist");
+const distPath = path.join(DIST_DIR, "team.html");
 
 const team = [];
 const idArray = [];
