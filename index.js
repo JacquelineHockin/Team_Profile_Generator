@@ -4,8 +4,8 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const fs = require("fs");
 
-const DIST_DIR = path.resolve(__dirname, "dist");
-const distPath = path.join(DIST_DIR, "team.html");
+// const DIST_DIR = path.resolve(__dirname, "dist");
+// const distPath = path.join(DIST_DIR, "team.html");
 
 const managerQuestions = [
   {
@@ -28,12 +28,37 @@ const managerQuestions = [
     name: "officeNumber",
     message: "What is your office number?",
   },
+  {
+    name: "upNext",
+    type: "list",
+    choices: ["Add Engineer", "Add Intern", "My team is complete!"],
+    message: "What next?",
+  },
 ];
+
+// ask(managerQuestions);
+
+function ask(questionsArr) {
+  inquirer
+    .prompt(questionsArr)
+    .then((member) => {
+      team.push(member);
+
+      if (member.upNext === "Add Engineer") {
+        ask(engineerQuestions);
+      } else if (member.upNext === "Add Intern") {
+        ask(internQuestions);
+      } else {
+        createProfiles(team);
+      }
+    })
+    .catch((err) => console.log(err));
+}
+
 const team = [];
 const idArray = [];
 
 inquirer.prompt(managerQuestions).then((answers) => {
-  // Use user feedback for... whatever!!
   const manager = new Manager(
     answers.name,
     answers.email,
@@ -49,7 +74,7 @@ inquirer.prompt(managerQuestions).then((answers) => {
       .prompt([
         {
           type: "list",
-          name: "memberChoice",
+          name: "memberChooses",
           message: "Which type of team member would you like to add?",
           choices: [
             "Engineer",
@@ -61,10 +86,10 @@ inquirer.prompt(managerQuestions).then((answers) => {
       .then((userChooses) => {
         switch (userChooses.memberChooses) {
           case "Engineer":
-            addEngineer();
+            engineerQuestions();
             break;
           case "Intern":
-            addIntern();
+            internQuestions();
             break;
           default:
             assembleTeam();
@@ -73,16 +98,16 @@ inquirer.prompt(managerQuestions).then((answers) => {
   }
 
   // Add new engineer
-  const addEngineer = [
+  const engineerQuestions = [
     {
       name: "name",
       type: "input",
-      message: "Please enter the name of the engineer:",
+      message: "What is the name of the engineer?",
     },
     {
       name: "id",
       type: "input",
-      message: "Please enter the ID of the engineer:",
+      message: "What is the ID of the engineer?",
     },
     {
       name: "email",
@@ -92,7 +117,7 @@ inquirer.prompt(managerQuestions).then((answers) => {
     {
       name: "github",
       type: "input",
-      message: "Please enter the engineer's Github username:",
+      message: "what is the engineer's Github username?",
     },
     {
       name: "upNext",
