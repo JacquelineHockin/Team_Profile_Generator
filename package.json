@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Backend CLI app",
   "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
     "test": "jest"
   },
