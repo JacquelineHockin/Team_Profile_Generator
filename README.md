@@ -33,7 +33,7 @@ dependencies:
 
 ## Installation
 
-npm install, npm i inquirer, npm install --save-dev jest
+npm install, npm i inquirer@8.2.4, npm install --save-dev jest
 
 
 ## Usage 
